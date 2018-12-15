@@ -1,0 +1,62 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  	<head>
+  		
+  	</head>
+
+<body>
+	Primer dato:   <input type="number" id="inputGrafico1" value="2"><br>
+	Segundo dato: <input type="number" id="inputGrafico2" value="18"><br>
+	Tercer dato:   <input type="number" id="inputGrafico3" value="12"><br>
+
+	<input type="button" id="inputgraficoBoton" value="actualizar" onclick="actualizarGrafico();">
+
+	<!--el grafico como tal -->
+	<div style="heght:800px; width:800px;">
+		<div class="ct-chart ct-perfect-fourth"></div>
+	</div>
+	<!--el grafico como tal -->
+
+	<!--scripts de los graficos -->
+	<script type="text/javascript">
+
+		var data = {
+			labels: ['Primer dato', 'Segundo dato', 'Tercer dato'],
+			series: 
+			[
+				document.getElementById('inputGrafico1').value, 
+				document.getElementById('inputGrafico2').value, 
+				document.getElementById('inputGrafico3').value
+			]
+		};
+
+		var grafico = new Chartist.Bar('.ct-chart', data, {distributeSeries : true});
+
+		function actualizarGrafico(){
+			
+			data = {
+				labels: ['Primer dato', 'Segundo dato', 'Tercer dato'],
+				series: 
+				[
+					document.getElementById('inputGrafico1').value, 
+					document.getElementById('inputGrafico2').value, 
+					document.getElementById('inputGrafico3').value
+				]
+			};
+
+			grafico.update(data);
+			  	
+		}
+	</script>
+</body>
+
+</html>
+
+
+
+
+
+

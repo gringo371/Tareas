@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="ejercicio de comtroles">
+  <meta name="author" content="Luis Angel Piedra">
+
+  <!-- librerias del calendario -->
+  <link href='https://dl.dropbox.com/s/x24cyypzfaybkhb/fullcalendar.min.css?dl=0' rel='stylesheet' />
+  <link href='https://dl.dropbox.com/s/ta5mrhut8zr9okj/fullcalendar.print.min.css?dl=0' rel='stylesheet' media='print' />
+  <script src='https://dl.dropbox.com/s/4g2c4fovni6s1nt/moment.min.js?dl=0'></script>
+  <script src='https://dl.dropbox.com/s/2nu6fz31wy3ke34/jquery.min.js?dl=0'></script>
+  <script src='https://dl.dropbox.com/s/l3o4pzltl7sf3kf/fullcalendar.min.js?dl=0'></script>
+  <!-- librerias del calendario -->
+
+
+  <script>
+
+      $(document).ready(function() {
+
+          $('#calendar').fullCalendar({
+              header: {
+                  left: 'prev,next today',
+                  center: 'title',
+                  right: 'month,agendaWeek,agendaDay,listWeek'
+              },
+          defaultDate: '2018-03-12',
+          navLinks: true, // can click day/week names to navigate views
+          editable: true,
+          eventLimit: true, // allow "more" link when too many events
+          events: [
+          {
+              title: 'transportar el 3 gramos polvo blanco al colombo',
+              start: '2018-03-01',
+          },
+          {
+              title: 'Vender plantas en escazu',
+              start: '2018-03-07',
+              end: '2018-03-10'
+          },
+          {
+              id: 999,
+              title: 'Imponer el respeto con los otros vendedores de plantas de escazu',
+              start: '2018-03-09T16:00:00'
+          },
+          {
+              id: 999,
+              title: 'Imponer el respeto con los otros vendedores de plantas de escazu',
+              start: '2018-03-16T16:00:00'
+          },
+          {
+              title: 'Hacer modicas donaciones a oficiales por su amable ayuda',
+              start: '2018-03-11'
+          },
+          {
+              title: 'hacer los arreglos para recivir las plantas y el polvo blanco',
+              start: '2018-03-11',
+              end: '2018-03-13'
+          },
+          {
+              title: 'Procesar el material',
+              start: '2018-03-12T10:30:00',
+              end: '2018-03-12T12:30:00'
+          },
+          {
+              title: 'Empacar el producto',
+              start: '2018-03-12T12:00:00'
+          },
+          {
+              title: 'Distribuir el material entre los agentes de ventas',
+              start: '2018-03-12T14:30:00'
+          },
+          {
+              title: 'Buscar al comerciante que no ha pagado sus deudas',
+              start: '2018-03-13T07:00:00'
+          },
+          {
+              title: 'preciene aqui para ir a google',
+              url: 'http://google.com/',
+              start: '2018-03-28'
+          }
+        ]
+      });
+
+      });
+
+  </script>
+  <style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+</head>
+<body>
+
+  <div id='calendar'></div>
+
+</body>
+</html>

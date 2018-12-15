@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="ejercicio de comtroles">
+	<meta name="author" content="Luis Angel Piedra">
+
+	<!--Css del tab comtrol -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- para que el se vea bonito en general -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+	<header>
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Hello World</h1>
+				<h3>Tabs in Bootstrap</h3>
+			</div> 
+		</div> 
+	</header>
+
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#Home" data-toggle="tab">Home</a>
+			</li>
+			<li>
+				<a href="#laOtra" data-toggle="tab">laOtra</a>
+			</li>
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane" id="Home">
+				<p>home description</p>
+			</div>
+
+		<div class="tab-pane" id="laOtra">
+				<p>la otra descripcion</p>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- jquery -->
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+	<!-- javascript del tab comtrol -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

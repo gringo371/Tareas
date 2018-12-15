@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="description" content="Tarea de semana 4, NOTA: el url del server esta al inicil del script de javascript">
+	<meta name="author" content="Luis Angel Piedra">
+
+	<script language="javascript" type="text/javascript">
+
+														//URL DEL SERVER
+														//URL DEL SERVER
+														//URL DEL SERVER
+		/*URL DEL SERVER -->*/var URL_SERVER = "http://localhost:8000/Tareas/ISI-BSI-19_V-2018/Server.php";//<-- URL DEL SERVER
+														//URL DEL SERVER
+														//URL DEL SERVER
+														//URL DEL SERVER
+
+		//reglas y respuestas
+	 	var reglasEmail = [
+	 		[/^[a-z]+@[a-z]+\.[a-z]+$/, "El email ingresado no cumple con el formato necesario"]
+	 	];
+	 	var reglasNombre = [
+	 		[/^[A-Za-z][a-z]+\.[A-Za-z][a-z]+$/, "El nombre se debe ingresar como \"nombre.apellido\""]
+	 	];
+	 	var reglasBithday = [
+	 		[/(^\d{1,2}\/\d{1,2}\/\d{2}$)|(^\d{1,2}\/\d{1,2}\/\d{4}$)/, "La fecha de cumpleaños debe ingresar como \"dia/mes/año\""]
+	 	];
+	 	var reglasOculto = [
+	 		[/^$/, "no creo quea sea necesario poner ningun mensaje de error aca, porque teoricamente nadie puede escribir nada aqui"]
+	 	];
+	 	var reglasContrasena = [
+	 		[/[A-Z]/, "la clave debe tener al menos una letra mayuscula"],
+	 		[/[a-z]/, "la clave debe tener al menos una letra minuscula"],
+			[/[^a-zA-Z\d&]/, "la clave debe tener al menos un simbolo, distinto de &"],
+			[/\d/, "la clave debe tener al menos un número"]
+		];
+
+		//booleanas
+		var correcto; //una booleana para codigo limpio
+		var EmailCorrecto, OcultoCorrecto, NombreCorrecto, BithdayCorrecto, ContrasenaCorrecto;
+		//inputs
+		var inputEmail, inputOculto, inputNombre, inputEnviar, inputBithday, inputContrasena;
+		//output de respuesta al cliente
+		var outputResultado;
+		//outputs
+		var outputEmail, outputOculto, outputNombre, outputBithday, outputContrasena;
+		//variables para contener la info del usuario
+		var email, oculto, nombre, bithday, contrasena;
+
+		//funcion inicializar variables y poner listeners
+		//se deberia de ejecutar una vez que el se termine de cargar el body
+		function main(){
+			outputResultado = document.getElementById("outputResultado");
+
+			inputEmail = document.getElementById("inputEmail");
+			inputOculto = document.getElementById("inputOculto");
+			inputNombre = document.getElementById("inputNombre");
+			inputEnviar = document.getElementById("inputEnviar");
+			inputBithday = document.getElementById("inputBithday");
+			inputContrasena = document.getElementById("inputContrasena");
+
+			outputEmail = document.getElementById("outputEmail");
+			outputOculto = document.getElementById("outputOculto");
+			outputNombre = document.getElementById("outputNombre");
+			outputBithday = document.getElementById("outputBithday");
+			outputContrasena = document.getElementById("outputContrasena");
+
+			inputEnviar.addEventListener('click', alPrecionarEnviar);
+		}
+
+		//funcion para provar las reglas de un campo y validar un dato,
+		//se resive un output para enviar el mensaje de error y informar al usuario
+		//retorna true o false segun si el dato es valido
+		function validarReglas(valor, reglas, output){
+
+			correcto = true;
+			for (var i = 0; i < reglas.length; i++) {
+
+				if(!reglas[i][0].test(valor)){
+					correcto = false;
+					output.textContent = reglas[i][1];
+					break;
+				}
+			}
+
+			if(correcto){
+				output.textContent = "";
+			}
+
+			return correcto;
+		}
+
+		//function para extrar la data del usuario
+		function extraerDataDelUsuario() {
+			email = inputEmail.value;
+			oculto = inputOculto.value;
+			nombre = inputNombre.value;
+			bithday = inputBithday.value;
+			contrasena = inputContrasena.value;
+		}
+
+		//funcion para validar la data del usuario
+		function validarLaDataDelUsuario() {
+			EmailCorrecto = validarReglas(email, reglasEmail, outputEmail);
+			OcultoCorrecto = validarReglas(oculto, reglasOculto, outputOculto);
+			NombreCorrecto = validarReglas(nombre, reglasNombre, outputNombre);
+			BithdayCorrecto = validarReglas(bithday, reglasBithday, outputBithday);
+			ContrasenaCorrecto = validarReglas(contrasena, reglasContrasena, outputContrasena);
+		}
+
+		//funcion para enviar data al server,
+		//esta en javascript puro por que la vez pasada use jquery
+		function enviarData(){
+
+			//LEEME--> con el proposito de hacerle la vida más facil al profe               <--LEEME
+			//LEEME--> el url del server ESTA HASTA ARRIVA DEL SCRIPT                       <--LEEME
+			//LEEME--> desde hay puede cambiar el puerto o cualquier otra cosa que necesite <--LEEME
+			var mensaje = URL_SERVER +
+	        	"?email=" + email + 
+	        	"&oculto=" + oculto + 
+	        	"&nombre=" + nombre + 
+	        	"&bithday=" + bithday + 
+	        	"&contrasena=" + contrasena;
+
+			var xmlhttp = new XMLHttpRequest();
+	        xmlhttp.onreadystatechange = function() {
+	            if (this.readyState == 4 && this.status == 200) {
+	                outputResultado.innerHTML = this.responseText;
+	            }
+	        };
+	        xmlhttp.open("GET", mensaje, true);
+
+	        xmlhttp.send();
+		}
+
+		//funcion para validar y enviar datos al server
+		function alPrecionarEnviar(){
+
+			extraerDataDelUsuario();
+
+			validarLaDataDelUsuario();
+
+			if(EmailCorrecto && 
+				OcultoCorrecto && 
+				NombreCorrecto && 
+				BithdayCorrecto && 
+				ContrasenaCorrecto){
+
+				outputResultado.textContent = "Enviando mensaje";
+				enviarData();
+			}
+			else{
+				outputResultado.textContent = "Uno o más campos comtienen errores";
+			}
+
+		}
+
+
+
+	</script>
+
+</head>
+<body onload="main()">
+
+	<spam>Nombre: </spam>
+	<input id="inputNombre"> 
+	<spam id="outputNombre"></spam><br>
+
+	<spam>Comtraseña: </spam>
+	<input id="inputContrasena">
+	<spam id="outputContrasena"></spam><br>
+
+	<spam>Email: </spam>
+	<input id="inputEmail">
+	<spam id="outputEmail"></spam><br>
+
+	<spam>Fecha de nacimiento: </spam>
+	<input id="inputBithday">
+	<spam id="outputBithday"></spam><br>
+
+	<div style="display: none">
+		<spam>Campo oculto: </spam>
+		<input id="inputOculto">
+		<spam id="outputOculto"></spam>
+	</div>
+
+	<input id="inputEnviar" name="inputEnviar" type="button" value="Enviar"><br>
+
+	<spam id="outputResultado"></spam>
+
+</body>
+</html>
+
+
