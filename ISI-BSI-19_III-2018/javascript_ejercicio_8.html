@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="description" content="Ejercicio 8 de la practica de segunda semana">
+	<meta name="author" content="Luis Angel Piedra">
+
+	<script language="javascript" type="text/javascript">
+		
+		function functionQueSePidioEnElEjercicio(textoQueEntraPorParametro)
+		{
+
+			if (textoQueEntraPorParametro == textoQueEntraPorParametro.toUpperCase())
+			{
+				document.getElementById("outputResultado").textContent = "La frace esta conformada unicamente por mayusculas"
+			} 
+			else if(textoQueEntraPorParametro == textoQueEntraPorParametro.toLowerCase())
+			{
+				document.getElementById("outputResultado").textContent = "La frace esta conformada unicamente por minusculas"
+			} 
+			else
+			{
+				document.getElementById("outputResultado").textContent = "La frace contiene mayusculas y minusculas"
+			}
+
+		}
+
+		//funcion que se activa cuando se cambia el texto del input del numero entero
+		function cuandoSeCambiaElInput()
+		{
+			//mostrar si el número en cuestiones par o no
+			functionQueSePidioEnElEjercicio(document.getElementById("inputTexto").value);
+		}
+
+	</script>
+
+</head>
+<body>
+	
+	<spam>Inserte un texto y precione enter: </spam>
+	<input type="text" id="inputTexto" onchange="cuandoSeCambiaElInput()"><br>
+
+	<spam id="outputResultado"></spam>
+
+</body>
+</html>
+
+

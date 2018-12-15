@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="description" content="Ejercicio 10 de la practica de tercera semana">
+	<meta name="author" content="Luis Angel Piedra">
+
+	<script type="text/javascript">
+
+		/* AGE FUNCTIONS */
+		var outputEdad;
+		var age;
+
+		function onAgeRelese(){
+			age.removeEventListener("mouseup", onAgeRelese);
+			age.removeEventListener("mousemove", onAgeChange);
+		}
+
+		function onAgeChange(){
+			outputEdad.textContent = age.value;
+		}
+
+		function onAgePressed(){
+			age.addEventListener("mouseup", onAgeRelese);
+			age.addEventListener("mousemove", onAgeChange);
+		}
+		/* AGE FUNCTIONS */
+
+
+		/* DESCRIPTION FUNCTIONS */
+		var DEFAULD_EXAMPLE = "Ejemplo: Soy una persona proactiva y entusiasta.";
+		var REG_EXP_DESCRIPTION = /^[\r\n ]*$/;
+
+		var description;
+
+		function onDescriptionGetFocus(){
+			if (description.value == DEFAULD_EXAMPLE){
+				description.value = "";
+			}
+		}
+
+		function onDescriptionLostFocus(){
+			if (REG_EXP_DESCRIPTION.test(description.value)){
+				description.value = DEFAULD_EXAMPLE;
+			}
+		}
+
+		/* DESCRIPTION FUNCTIONS */
+
+		function onPageLoaded(){
+			/* AGE  */
+			age = document.getElementById("age");
+			age.addEventListener("mousedown", onAgePressed);
+
+			outputEdad = document.getElementById("outputEdad");
+			outputEdad.textContent = age.value;
+			/* AGE  */
+
+			/* DESCRIPTION */
+			description = document.getElementById("description");
+			description.value = DEFAULD_EXAMPLE;
+
+			description.addEventListener("focus", onDescriptionGetFocus);
+			description.addEventListener("blur", onDescriptionLostFocus);
+			/* DESCRIPTION */
+		}
+
+		function post(){
+			document.getElementById("form").submit();
+		}
+
+		function validateData(){
+			post();
+		}
+
+	</script>
+	
+</head>
+<body onload="onPageLoaded()">
+	
+	<form id="form" action="http://localhost:8000/ISI-BSI-19_III-2018/PHP_ejercicio_10-2.php" method="post">
+
+		<!-- Un campo de texto plano -->
+		<spam class="label">Nombre: </spam>
+		<input id="inputName" name="inputName">
+		<br><br>
+
+		<!-- Un campo de tipo rango -->
+		<spam class="label">Edad: </spam>
+		<spam id="outputEdad"></spam>	
+		<input type="range" id="age" name="age" value="25" min="0" max="100">
+		<br><br>
+
+		<!-- Un campo de selección -->
+		<spam class="label">Sexo: </spam>
+		<select id="sex" name="sex">
+			<option value="masculino">Hombre</option>
+		  	<option value="femenino">Mujer</option>
+		</select>
+		<br><br>
+
+		<!-- Un campo de tipo check -->
+		<spam class="label">Estado civil: </spam><br>
+	  	<input type="radio" name="maritalStatus" value="solter" checked="checked"><spam class="label">Solter@</spam><br>
+	  	<input type="radio" name="maritalStatus" value="casad"><spam class="label">Casad@</spam><br>
+	  	<input type="radio" name="maritalStatus" value="en union libre"><spam class="label">Union libre</spam><br>
+	  	<input type="radio" name="maritalStatus" value="divorsiad"><spam class="label">Divorsiad@</spam><br>
+	  	<input type="radio" name="maritalStatus" value="viud"><spam class="label">Viud@</spam><br>
+	  	<br>
+
+	  	<!-- Un grupo de campos radiales -->
+	  	<input type="checkbox" name="alcohol"> <spam class="label"> ¿Consume alcohol?</spam><br>
+	    <input type="checkbox" name="hipertenso"> <spam class="label"> ¿Hipertenso?</spam><br>
+	    <input type="checkbox" name="asmatico"> <spam class="label"> ¿Asmático?</spam><br>
+	    <input type="checkbox" name="hiperglicemia"> <spam class="label"> ¿Hiperglicemia?</spam><br>
+	    <br>
+
+	  	<!-- Un área de texto de 3 líneas-->
+	  	<spam class="label" name=>Ingrese una breve descripción de si mismo: </spam><br>
+		<textarea id="description" name="description" rows="3" cols="75"></textarea>
+		<br><br>
+
+		<!-- Un botón -->
+		<input type="button" onclick="validateData()" value="Enviar" />
+
+
+		<spam id="outputForm"></spam>
+
+	</form>
+
+</body>
+</html>
+
+

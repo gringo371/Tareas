@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="description" content="Ejercicio 9 de la practica de segunda semana">
+	<meta name="author" content="Luis Angel Piedra">
+
+	<script language="javascript" type="text/javascript">
+		
+		var input;
+		var output;
+
+		var textoAlreve;
+		var textoAlDerecho;
+
+		//funcion que se activa cuando se cambia el texto del input del numero entero
+		function cuandoSeCambiaElInput(textoPorParametro)
+		{
+			if (textoPorParametro != " "){
+				textoAlrevez = "";
+				textoAlDerecho = "";
+
+				for (var i = textoPorParametro.length - 1; i >= 0; i--) {
+					if (textoPorParametro.charAt(i) != " ")
+					{
+						textoAlrevez += textoPorParametro.charAt(i);
+						textoAlDerecho = textoPorParametro.charAt(i) + textoAlDerecho;
+					}
+				}
+
+
+				if (textoAlrevez == textoAlDerecho)
+				{
+					output.innerText  = "el texto \"" + textoPorParametro + "\"  es un palindromo";
+				}
+				else
+				{
+					output.innerText  = "el texto \"" + textoPorParametro + "\" no es un palindromo";
+				}
+			}
+
+		}
+
+		//funcion que se ejecuta cuando se termina de cargar la pagina
+		function cuandoLaPaginaHayaTerminadoDeCargar()
+		{
+
+			//inicializando el input y output
+			input = document.getElementById("inputTexto");
+			output = document.getElementById("outputResultado");
+
+			//añadiendo un escuchador a la variable input, para escuchar cuando el texto cambie
+			input.addEventListener('keyup', function () {cuandoSeCambiaElInput( input.value ); });
+		}
+
+	</script>
+
+</head>
+<body onload="cuandoLaPaginaHayaTerminadoDeCargar()">
+	
+	<spam>Ingrese un texto: </spam>
+	<input id="inputTexto"><br>
+
+	<spam id="outputResultado"></spam>
+
+</body>
+</html>
+
+

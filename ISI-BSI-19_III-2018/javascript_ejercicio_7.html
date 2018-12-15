@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="description" content="Ejercicio 7 de la practica de segunda semana">
+	<meta name="author" content="Luis Angel Piedra">
+
+	<script language="javascript" type="text/javascript">
+		
+		var input;
+		var output;
+
+
+		function functionQueSePidioEnElEjercicio(numeroQueEntraPorParametro)
+		{
+			return "El número " + numeroQueEntraPorParametro + " es " + ((numeroQueEntraPorParametro % 2 == 0) ? "par" : "impar") + ".";
+		}
+
+		//funcion que se activa cuando se cambia el texto del input del numero entero
+		function cuandoSeCambiaElInput()
+		{
+			//mostrar si el número en cuestiones par o no
+			output.textContent = functionQueSePidioEnElEjercicio(input.value);
+		}
+
+		//funcion que se ejecuta cuando se termina de cargar la pagina
+		function cuandoLaPaginaHayaTerminadoDeCargar()
+		{
+			//inicializando el input y output
+			input = document.getElementById("inputNumero");
+			output = document.getElementById("outputResultado");
+		}
+
+	</script>
+
+</head>
+<body onload="cuandoLaPaginaHayaTerminadoDeCargar()">
+	
+	<spam>Inserte un número y precione enter: </spam>
+	<input type="number" id="inputNumero" onchange="cuandoSeCambiaElInput()"><br>
+
+	<spam id="outputResultado"></spam>
+
+</body>
+</html>
+
+
