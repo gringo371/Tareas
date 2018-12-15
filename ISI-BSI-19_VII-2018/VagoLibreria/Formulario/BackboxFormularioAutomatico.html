@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!--Query -->
+	
+
+	<script src="InputAutomatico.js"></script> <!-- InputAutomatico -->
+	<script src="FormularioAutomatico.js"></script> <!-- FormularioAutomatico -->
+
+	<script language="javascript" type="text/javascript">
+
+	var formulario;
+
+	function alFinalizarLosInputs(){
+
+		var inputCedula = formulario.getInput("tipoCedula");
+		var cedula = formulario.getInput("cedula");
+
+		cedula.irregularidadDeValidacion = function(extras){
+			var indice = inputCedula.valor();
+
+			var patron = extras[ indice * 2 ];
+			var mensaje = extras[ (indice * 2) + 1 ];
+
+			cedula.establecerPatronYMensaje
+				(
+					patron,
+					mensaje
+				);
+
+		};
+
+	}
+
+	$(document).ready(function(){
+
+		var link = "http://localhost:8000/VagoLibreria/Formulario/BackboxFormularioAutomatico.php";
+
+		var datosEnviar = {};
+
+		formulario = new FormularioAutomatico(
+				link,
+				datosEnviar,
+				$("#tabla")[0],
+				alFinalizarLosInputs
+			);
+	});
+
+	</script>
+</head>
+<body>
+
+	<span id="output"></span>
+
+	<table id="tabla"></table>
+
+</body>
+</html>

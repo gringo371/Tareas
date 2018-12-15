@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!--Query -->
+	<script src="InputAutomatico.js"></script> <!-- InputAutomatico --> 
+	<script language="javascript" type="text/javascript">
+
+		$(document).ready(function(){
+
+			//la tabla para introducir el input
+			var tabla = $("#tablaDelFormulario")[0];
+
+			//el arreglo con la data necesaria para hacer el input
+			var arreglo = new Array(
+				"identificador", 	//<- identificador del input
+				"number",			//<- tipo del input
+				"Número entero:",	//<- texto que identifica el input
+				/^[6-9]{2,9}$/,		//<- patron de validacion
+				"El número debe tener de 2 a 9 digitos, y deben ser 6, 7, 8, o 9." //<- mensaje en caso de que falle el patron
+			);
+
+			var input = new InputAutomatico
+				(
+					arreglo,
+					tabla
+				);
+
+			$("#eliminar").click(
+				function(){
+					input.destroy();
+					input = null;
+				}
+			);
+
+			$("#limpiar").click(
+				function(){
+					input.limpiar();
+				}
+			);
+
+			$("#validar").click(
+				function(){
+					input.validar();
+				}
+			);
+
+			$("#extraer").click(
+				function(){
+					$("#output")[0].innerText = input.valor();
+				}
+			);
+		});//FIN DEL ON_READY
+
+	</script>
+	
+</head>
+<body>
+
+	<table id="tablaDelFormulario"></table>
+
+	<input type="button" value="eliminar" id="eliminar"></input>
+	<input type="button" value="limpiar" id="limpiar"></input>
+	<input type="button" value="validar" id="validar"></input>
+	<input type="button" value="extraer data" id="extraer"></input>
+	<br>
+	<span id="output"></span>
+</body>
+</html>

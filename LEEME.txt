@@ -1,0 +1,20 @@
+Tareas de: Luis Angel Piedra
+
+
+
+Todos las webs aca usan el puerto 8000.
+Favor configurar el server para usar el puerto 8000
+o bien usar algun script o programa que cambie los puertos de los archivos masivamente.
+
+
+
+Las tareas estan acomodadas en carpetas, por lo tanto es necesario que el orden de las carpetas se mantenga
+de tal forma que deberia colocar la carpeta de "Tareas" en la carpeta del server
+
+como por ejemplo:
+C:\xampp\htdocs\Tareas
+C:\wamp64\www\Tareas
+
+
+
+Gracias por su atención.

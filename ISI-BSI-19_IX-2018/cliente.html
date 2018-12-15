@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="la tarea de la semana 9, aun que no se si tal vez sea de semana 6, por que el enunciado dice que es de la 6, pero esta en semana 9">
+	<meta name="author" content="Luis Angel Piedra">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!--Query -->
+	<script>
+
+	//valida un input, a partir del input, el patron para validar y un mensaje en caso de error.
+
+		function enviarJquery(){
+
+			var valor = $("#input").val();
+			var patron = /^\d+$/;
+
+			if( patron.test(valor) ){
+				
+				$.post( "http://localhost:8000/Tareas/ISI-BSI-19_IX-2018/Server.php", 
+					{ "metros": valor }, 
+					function(respuesta){
+						$("#output").text(respuesta);
+					}
+				);
+
+			}
+			else{
+				$("#input")[0].setCustomValidity("Se requiere un número.");
+				$("#input")[0].reportValidity();
+			}
+
+		}
+		
+	</script>
+	<title></title>
+</head>
+<body>
+
+	Metros: <input type="number" value="0" id="input" onkeyup="enviarJquery()">
+	<br>pies: <span id="output"></span>
+	<p>No tengo la menor idea de como es que al multiplicar 0 por 3,28084 me da como resultado 028084, pero asi es, imagino que puede ser algo de mi servidor, o alguna particularidad de apache o php, no lo se.</p>
+
+</body>
+
+</html>

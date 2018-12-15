@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="la ultima de las primeras tareas, suena contradictorio, pero lo es">
+	<meta name="author" content="Luis Angel Piedra">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!--Query -->
+	<script>
+
+
+		function enviarJquery(){
+
+			var numero1 = $("#numero1").val();
+			var numero2 = $("#numero2").val();
+
+			$.post( "http://localhost:8000/Tareas/ISI-BSI-19_VI-2018/Server.php", 
+				{ "numero1": numero1, "numero2": numero2 }, 
+				function(respuesta){
+					$("#output").text(respuesta);
+				});
+		}
+		
+	</script>
+	<title></title>
+</head>
+<body>
+
+	<input type="number" value="0" id="numero1" onkeyup="enviarJquery()"> + 
+	<input type="number" value="0" id="numero2" onkeyup="enviarJquery()"> = 
+	<span id="output"></span>
+
+</body>
+
+</html>

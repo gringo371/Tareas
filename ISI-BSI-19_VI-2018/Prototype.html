@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="la ultima de las primeras tareas, suena contradictorio, pero lo es">
+	<meta name="author" content="Luis Angel Piedra">
+	<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js"></script> <!-- Prototype -->
+	<script>
+
+
+		function enviarPrototype(){
+
+			var numero1 = document.getElementById('numero1').value;
+			var numero2 = document.getElementById('numero2').value;
+
+    		new Ajax.Request(
+    			"http://localhost:8000/Tareas/ISI-BSI-19_VI-2018/Server.php",
+    			{
+    				parameters: { "numero1": numero1, "numero2": numero2 },
+    				method:'POST',
+	                onSuccess:function(respuesta){
+	                	
+	                    document.getElementById('output').innerHTML = respuesta.responseText;
+	                }
+    			}
+    		);
+
+		}
+		
+	</script>
+	<title></title>
+</head>
+<body>
+
+	<input type="number" value="0" id="numero1" onkeyup="enviarPrototype()"> + 
+	<input type="number" value="0" id="numero2" onkeyup="enviarPrototype()"> = 
+	<span id="output"></span>
+
+</body>
+
+</html>

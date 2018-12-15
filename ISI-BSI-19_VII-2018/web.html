@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!--Query -->
+	
+
+	<script src="VagoLibreria/Formulario/InputAutomatico.js"></script> <!-- InputAutomatico -->
+	<script src="VagoLibreria/Formulario/FormularioAutomatico.js"></script> <!-- FormularioAutomatico -->
+	<script src="VagoLibreria/Select/TablaAutomatica.js"></script> <!-- TablaAutomatica -->
+
+	<script language="javascript" type="text/javascript">
+
+	var link = "http://localhost:8000/Tareas/ISI-BSI-19_VII-2018/Server.php";
+
+	function ejecutarAjax(transaccion){
+		if ( formulario.validar() ){
+			var datos = formulario.extraerTodo();
+
+			//mando 1 para pedir una insercion
+			datos["transaccion"] = transaccion;
+
+			$.post(link, datos, function(respuesta){
+				$("#output").html(respuesta);
+			});
+
+		}
+	}
+
+	$(document).ready(function(){
+
+		
+		var tabla;
+
+		var datosEnviar = { "transaccion" : "0" };
+
+		formulario = new FormularioAutomatico(
+				link,
+				datosEnviar,
+				$("#tabla")[0],
+				function(){}
+			);
+
+		$("#ingresar").click(
+			function(){
+
+				ejecutarAjax("1");
+				tabla.listar({ "transaccion" : "4" });
+			}
+		);
+
+		$("#modificar").click(
+			function(){
+
+				ejecutarAjax("2");
+				tabla.listar({ "transaccion" : "4" });
+			}
+		);
+
+		$("#eliminar").click(
+			function(){
+
+				ejecutarAjax("3");
+				tabla.listar({ "transaccion" : "4" });
+			}
+		);
+
+		tabla = new TablaAutomatica(link, $("#tablaParaSelect")[0]);
+
+		tabla.listar({ "transaccion" : "4" });
+
+
+	});// FIN DEL ON READY
+
+	</script>
+</head>
+<body>
+
+	<table id="tabla"></table>
+
+	<table>
+		<tr>
+		    <th> <input type="button" id="ingresar"  value="Ingresar" ></input> </th>
+		    <th> <input type="button" id="modificar" value="Modificar"></input> </th>
+		    <th> <input type="button" id="eliminar"  value="Eliminar" ></input> </th>
+  		</tr>
+	</table>
+
+	<span id="output"></span>
+
+	<table id="tablaParaSelect" border="1"></table>
+
+</body>
+</html>

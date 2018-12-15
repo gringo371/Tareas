@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="la ultima de las primeras tareas, suena contradictorio, pero lo es">
+	<meta name="author" content="Luis Angel Piedra">
+	<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js"></script> <!-- MooTools -->
+	<script>
+
+
+		function enviarMootools(){
+
+			var numero1 = document.getElementById('numero1').value;
+			var numero2 = document.getElementById('numero2').value;
+
+
+
+    		var prueboRequest = new Request({
+				method: 'post',
+				url: "http://localhost:8000/Tareas/ISI-BSI-19_VI-2018/Server.php",
+    			data: "numero1=" + numero1 + "&numero2=" + numero2,
+				onSuccess: function(texto, xmlrespuesta){ document.getElementById('output').innerHTML = texto; },
+				onFailure: function(){alert('Fallo');}
+			}).send({ "numero1": numero1, "numero2": numero2 });
+
+		}
+		
+	</script>
+	<title></title>
+</head>
+<body>
+
+	<input type="number" value="0" id="numero1" onkeyup="enviarMootools()"> + 
+	<input type="number" value="0" id="numero2" onkeyup="enviarMootools()"> = 
+	<span id="output"></span>
+
+</body>
+
+</html>
